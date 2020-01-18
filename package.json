@@ -1,11 +1,15 @@
 {
-  "name": "angular-electron",
+  "name": "octant",
   "version": "6.4.1",
-  "description": "Angular 8 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "description": "Octant electron",
+  "homepage": "https://octant.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vmware-tanzu/octant.git"
+  },
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "Bryan Liles",
+    "email": "bryanliles@gmail.com"
   },
   "keywords": [
     "angular",
@@ -25,7 +29,7 @@
     "build": "npm run electron:serve-tsc && ng build",
     "build:dev": "npm run build -- -c dev",
     "build:prod": "npm run build -- -c production",
-    "ng:serve": "ng serve",
+    "ng:serve": "ng serve --port 4204",
     "ng:serve:web": "ng serve -c web -o",
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
     "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
