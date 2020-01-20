@@ -1,16 +1,8 @@
 {
   "name": "octant",
-  "version": "6.4.1",
+  "version": "0.1.0",
+  "private": true,
   "description": "Octant electron",
-  "homepage": "https://octant.dev",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vmware-tanzu/octant.git"
-  },
-  "author": {
-    "name": "Bryan Liles",
-    "email": "bryanliles@gmail.com"
-  },
   "keywords": [
     "angular",
     "angular 8",
@@ -20,32 +12,47 @@
     "spectron",
     "sass"
   ],
+  "homepage": "https://octant.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vmware-tanzu/octant.git"
+  },
+  "author": {
+    "name": "Bryan Liles",
+    "email": "bryanliles@gmail.com"
+  },
   "main": "main.js",
-  "private": true,
   "scripts": {
-    "postinstall": "electron-builder install-app-deps",
-    "ng": "ng",
-    "start": "npm-run-all -p ng:serve electron:serve",
     "build": "npm run electron:serve-tsc && ng build",
     "build:dev": "npm run build -- -c dev",
     "build:prod": "npm run build -- -c production",
+    "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
+    "electron:linux": "npm run build:prod && electron-builder build --linux",
+    "electron:local": "npm run build:prod && electron .",
+    "electron:mac": "npm run build:prod && electron-builder build --mac",
+    "electron:serve": "wait-on http-get://localhost:4204/ && npm run electron:serve-tsc && electron . --serve",
+    "electron:serve-tsc": "tsc -p tsconfig-serve.json",
+    "electron:windows": "npm run build:prod && electron-builder build --windows",
+    "postinstall": "electron-builder install-app-deps",
+    "lint": "ng lint",
+    "ng": "ng",
     "ng:serve": "ng serve --port 4204",
     "ng:serve:web": "ng serve -c web -o",
-    "electron:serve-tsc": "tsc -p tsconfig-serve.json",
-    "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
-    "electron:local": "npm run build:prod && electron .",
-    "electron:linux": "npm run build:prod && electron-builder build --linux",
-    "electron:windows": "npm run build:prod && electron-builder build --windows",
-    "electron:mac": "npm run build:prod && electron-builder build --mac",
+    "start": "npm-run-all -p ng:serve electron:serve",
     "test": "ng test",
-    "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
-    "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "lint": "ng lint"
+    "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
+  },
+  "dependencies": {
+    "@clr/angular": "2.3.5",
+    "@clr/icons": "2.3.5",
+    "@clr/ui": "2.3.5",
+    "@webcomponents/custom-elements": "1.0.0"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "8.2.0",
-    "@angular-devkit/build-angular": "0.803.21",
+    "@angular-devkit/build-angular": "0.803.23",
     "@angular-eslint/builder": "0.0.1-alpha.17",
+    "@angular/animations": "~8.2.6",
     "@angular/cli": "8.3.21",
     "@angular/common": "8.2.14",
     "@angular/compiler": "8.2.14",
@@ -82,9 +89,15 @@
     "karma-jasmine-html-reporter": "1.4.2",
     "mocha": "6.2.2",
     "npm-run-all": "4.1.5",
+    "prettier": "^1.16.4",
+    "prettier-tslint": "^0.4.2",
     "rxjs": "6.5.3",
+    "sort-package-json": "1.39.0",
     "spectron": "9.0.0",
     "ts-node": "8.3.0",
+    "tslint": "~5.11.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "3.5.3",
     "wait-on": "3.3.0",
     "webdriver-manager": "12.1.7",

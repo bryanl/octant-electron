@@ -1,5 +1,25 @@
-<div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
+<!--<div class="container">-->
+<!--  <h1 class="title">-->
+<!--    {{ 'PAGES.HOME.TITLE' | translate }}-->
+<!--  </h1>-->
+<!--</div>-->
+
+<div class="main-container">
+  <header class="header header-6"></header>
+  <div class="content-container">
+    <clr-vertical-nav [clrVerticalNavCollapsible]="true" [clrVerticalNavCollapsed]="true">
+      <a clrVerticalNavLink routerLink="/" routerLinkActive="active" title="Workloads">
+        <clr-icon clrVerticalNavIcon shape="applications" class="is-solid"></clr-icon>
+        <span class="tooltip-content">
+        Workloads
+        </span>
+      </a>
+      <a clrVerticalNavLink routerLink="/foo" routerLinkActive="active" title="Dashboard">
+        <clr-icon clrVerticalNavIcon shape="dashboard" class="is-solid"></clr-icon>
+        Dashboard
+      </a>
+    </clr-vertical-nav>
+    <div class="content-area">
+    </div>
+  </div>
 </div>
